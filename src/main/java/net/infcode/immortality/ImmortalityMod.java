@@ -1,6 +1,7 @@
 package net.infcode.immortality;
 
 import net.fabricmc.api.ModInitializer;
+import net.infcode.immortality.block.ModBlocks;
 import net.infcode.immortality.item.ModItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,5 +21,6 @@ public class ImmortalityMod implements ModInitializer {
         LOGGER.info(MODID + " Initialize");
 
         ModItems.registerModItems();
+        ModBlocks.registerModBlocks();
     }
 }
