@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "immortality:block/alchemy_bush_stage3"
+  }
+}
