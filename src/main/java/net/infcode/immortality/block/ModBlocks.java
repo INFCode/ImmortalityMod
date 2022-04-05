@@ -13,7 +13,8 @@ import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
     public static final Block ALCHEMY_BUSH = registerBlock("alchemy_bush",
-        new AlchemyBushBlock(FabricBlockSettings.copy(Blocks.SWEET_BERRY_BUSH)), ItemGroup.MISC);
+        new AlchemyBushBlock(FabricBlockSettings.copy(Blocks.SWEET_BERRY_BUSH).nonOpaque()),
+        ItemGroup.MISC);
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         return Registry.register(Registry.BLOCK, new Identifier(ImmortalityMod.MODID, name), block);
