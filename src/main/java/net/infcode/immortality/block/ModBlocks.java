@@ -3,8 +3,7 @@ package net.infcode.immortality.block;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.infcode.immortality.ImmortalityMod;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -13,10 +12,13 @@ import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
     public static final Block ALCHEMY_BUSH = registerBlock("alchemy_bush",
-        new AlchemyBushBlock(FabricBlockSettings.copy(Blocks.SWEET_BERRY_BUSH).nonOpaque()),
-        ItemGroup.MISC);
+        new AlchemyBushBlock(FabricBlockSettings.copy(Blocks.SWEET_BERRY_BUSH).nonOpaque()));
 
-    private static Block registerBlock(String name, Block block, ItemGroup group) {
+    public static final Block JADE_ORE = registerBlockWithItem("jade_ore",
+        new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool()
+            .strength(3.0f, 3.0f)), ItemGroup.MISC);
+
+    private static Block registerBlock(String name, Block block) {
         return Registry.register(Registry.BLOCK, new Identifier(ImmortalityMod.MODID, name), block);
     }
 
@@ -27,7 +29,7 @@ public class ModBlocks {
 
     private static Block registerBlockWithItem(String name, Block block, ItemGroup group) {
         registerBlockItem(name, block, group);
-        return registerBlock(name, block, group);
+        return registerBlock(name, block);
     }
 
     public static void registerModBlocks() {
