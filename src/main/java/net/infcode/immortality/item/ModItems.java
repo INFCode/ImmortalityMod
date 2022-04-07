@@ -9,6 +9,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+@SuppressWarnings({"unused"})
 public class ModItems {
     public static final Item ALCHEMY_FRUIT = registerItem("alchemy_fruit",
         new AliasedBlockItem(ModBlocks.ALCHEMY_BUSH,

@@ -10,6 +10,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+@SuppressWarnings({"unused"})
 public class ModBlocks {
     public static final Block ALCHEMY_BUSH = registerBlock("alchemy_bush",
         new AlchemyBushBlock(FabricBlockSettings.copy(Blocks.SWEET_BERRY_BUSH).nonOpaque()));

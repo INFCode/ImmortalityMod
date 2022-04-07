@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
+@SuppressWarnings({"deprecation"})
 public class AlchemyBushBlock
     extends PlantBlock
     implements Fertilizable {
