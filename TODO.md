@@ -1,7 +1,7 @@
 Things to do before ver 0.1.0:
 
-- [ ] Add jade item
+- [ ] Add jade texture
 - [ ] Jade Ore generation
 - [x] Make Alchemy Fruit edible
 - [ ] Add Deepslate Jade
-- [ ] Add Own Item Group
+- [x] Add Own Item Group

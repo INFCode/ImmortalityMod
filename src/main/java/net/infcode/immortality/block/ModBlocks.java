@@ -3,6 +3,7 @@ package net.infcode.immortality.block;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.infcode.immortality.ImmortalityMod;
+import net.infcode.immortality.item.ModItemGroups;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -17,7 +18,7 @@ public class ModBlocks {
 
     public static final Block JADE_ORE = registerBlockWithItem("jade_ore",
         new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool()
-            .strength(3.0f, 3.0f)), ItemGroup.MISC);
+            .strength(3.0f, 3.0f)), ModItemGroups.IMMORTALITY_GROUP);
 
     private static Block registerBlock(String name, Block block) {
         return Registry.register(Registry.BLOCK, new Identifier(ImmortalityMod.MODID, name), block);
