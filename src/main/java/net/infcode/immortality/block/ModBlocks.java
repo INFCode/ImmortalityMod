@@ -9,6 +9,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
 
 @SuppressWarnings({"unused"})
@@ -18,7 +19,8 @@ public class ModBlocks {
 
     public static final Block JADE_ORE = registerBlockWithItem("jade_ore",
         new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool()
-            .strength(3.0f, 3.0f)), ModItemGroups.IMMORTALITY_GROUP);
+            .strength(3.0f, 3.0f), UniformIntProvider.create(0, 2)),
+        ModItemGroups.IMMORTALITY_GROUP);
 
     private static Block registerBlock(String name, Block block) {
         return Registry.register(Registry.BLOCK, new Identifier(ImmortalityMod.MODID, name), block);
