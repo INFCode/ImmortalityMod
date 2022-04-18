@@ -8,6 +8,7 @@ import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
@@ -20,6 +21,11 @@ public class ModBlocks {
     public static final Block JADE_ORE = registerBlockWithItem("jade_ore",
         new OreBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool()
             .strength(3.0f, 3.0f), UniformIntProvider.create(0, 2)),
+        ModItemGroups.IMMORTALITY_GROUP);
+
+    public static final Block DEEPSLATE_JADE_ORE = registerBlockWithItem("deepslate_jade_ore",
+        new OreBlock(AbstractBlock.Settings.copy(JADE_ORE).mapColor(MapColor.DEEPSLATE_GRAY)
+            .strength(4.5f, 3.0f).sounds(BlockSoundGroup.DEEPSLATE), UniformIntProvider.create(0, 2)),
         ModItemGroups.IMMORTALITY_GROUP);
 
     private static Block registerBlock(String name, Block block) {
