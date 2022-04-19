@@ -3,6 +3,7 @@ package net.infcode.immortality;
 import net.fabricmc.api.ModInitializer;
 import net.infcode.immortality.block.ModBlocks;
 import net.infcode.immortality.item.ModItems;
+import net.infcode.immortality.world.gen.ModWorldGen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,5 +23,6 @@ public class ImmortalityMod implements ModInitializer {
 
         ModItems.registerModItems();
         ModBlocks.registerModBlocks();
+        ModWorldGen.setWorldGen();
     }
 }
