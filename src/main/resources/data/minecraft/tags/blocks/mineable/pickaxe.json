@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "immortality:jade_ore"
+    "immortality:jade_ore",
+    "immortality:deepslate_jade_ore"
   ]
 }
