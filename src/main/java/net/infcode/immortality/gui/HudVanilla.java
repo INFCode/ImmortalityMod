@@ -23,20 +23,26 @@
  *
  */
 
-package net.infcode.immortality;
+package net.infcode.immortality.gui;
 
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.infcode.immortality.block.ModBlocks;
-import net.infcode.immortality.gui.RenderOverlay;
-import net.minecraft.client.render.RenderLayer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 
-public class ImmortalityClient implements ClientModInitializer {
-    @Override
-    public void onInitializeClient() {
-        ImmortalityMod.LOGGER.info("Registering rendering settings for " + ImmortalityMod.MODID +
-                                       "...");
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ALCHEMY_BUSH, RenderLayer.getCutout());
-        new RenderOverlay();
-    }
+/**
+ * This is originally from <a href="https://github.com/KosmX/RPG-Hud">https://github.com/KosmX/RPG-Hud</a>,
+ * simplified for project use.
+ */
+@Environment(EnvType.CLIENT)
+public class HudVanilla extends Hud {
+
+	public HudVanilla(MinecraftClient mc, String hudKey, String hudName) {
+		super(mc, hudKey, hudName);
+	}
+
+	@Override
+	protected HudElement setElementDebug() {
+		return new HudElementDebug();
+	}
+
 }
