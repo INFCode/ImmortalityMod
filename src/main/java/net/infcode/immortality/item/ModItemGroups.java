@@ -32,6 +32,6 @@ import net.minecraft.util.Identifier;
 
 public final class ModItemGroups {
     public static final ItemGroup IMMORTALITY_GROUP =
-        FabricItemGroupBuilder.build(new Identifier("immortallity", "items"),
+        FabricItemGroupBuilder.build(new Identifier("immortality", "items"),
             () -> new ItemStack(ModItems.ALCHEMY_FRUIT));
 }
