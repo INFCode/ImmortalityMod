@@ -5,5 +5,8 @@
 
 
   "item.immortality.alchemy_fruit": "灵果",
-  "item.immortality.jade": "玉石"
+  "item.immortality.jade": "玉石",
+
+
+  "itemGroup.immortality.items": "不朽-物品"
 }
