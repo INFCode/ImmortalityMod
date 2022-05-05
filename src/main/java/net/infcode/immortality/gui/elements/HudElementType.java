@@ -23,26 +23,27 @@
  *
  */
 
-package net.infcode.immortality.gui;
+package net.infcode.immortality.gui.elements;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.resource.language.I18n;
 
 /**
  * This is originally from <a href="https://github.com/KosmX/RPG-Hud">https://github.com/KosmX/RPG-Hud</a>,
  * simplified for project use.
  */
 @Environment(EnvType.CLIENT)
-public class HudVanilla extends Hud {
+public enum HudElementType {
+    DEBUG("gui.hud.immortality.debug");
 
-	public HudVanilla(MinecraftClient mc, String hudKey, String hudName) {
-		super(mc, hudKey, hudName);
-	}
+    private final String displayName;
 
-	@Override
-	protected HudElement setElementDebug() {
-		return new HudElementDebug();
-	}
+    HudElementType(String displayName) {
+        this.displayName = displayName;
+    }
 
+    public String getDisplayName() {
+        return I18n.translate(this.displayName);
+    }
 }

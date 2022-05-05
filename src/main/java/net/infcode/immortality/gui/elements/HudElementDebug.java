@@ -23,10 +23,9 @@
  *
  */
 
-package net.infcode.immortality.gui;
+package net.infcode.immortality.gui.elements;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.AbstractParentElement;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
@@ -41,7 +40,7 @@ public class HudElementDebug extends HudElement {
     public boolean checkConditions() {
         return super.checkConditions()
                    && !this.mc.options.debugEnabled
-                   &&  this.mc.player.getInventory().contains(new ItemStack(Items.CLOCK)) ;
+                   && this.mc.player.getInventory().contains(new ItemStack(Items.CLOCK));
     }
 
     @Override
@@ -51,7 +50,9 @@ public class HudElementDebug extends HudElement {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    /** Returns the time of the minecraft world as a String */
+    /**
+     * Returns the time of the minecraft world as a String
+     */
     public String getTime() {
         long time = this.mc.player.world.getTimeOfDay();
         long day = this.mc.player.world.getTimeOfDay() / 24000L;
@@ -69,10 +70,8 @@ public class HudElementDebug extends HudElement {
      * Formats the parameter time into the 24 hour format and returns it as a
      * String
      *
-     * @param currentHour
-     *            the hour
-     * @param currentMin
-     *            the minute
+     * @param currentHour the hour
+     * @param currentMin the minute
      */
     public static String get24HourTimeForString(long currentHour, long currentMin) {
         StringBuilder sb = new StringBuilder();
@@ -81,17 +80,15 @@ public class HudElementDebug extends HudElement {
         if (currentHour < 10)
             sb.append("0");
         sb.append(currentHour);
-        return sb.toString() + ":" + getMinuteForString(currentMin);
+        return sb + ":" + getMinuteForString(currentMin);
     }
 
     /**
      * Formats the parameter time into the 12 hour format and returns it as a
      * string
      *
-     * @param currentHour
-     *            the hour
-     * @param currentMin
-     *            the minute
+     * @param currentHour the hour
+     * @param currentMin the minute
      */
     public static String get12HourTimeForString(long currentHour, long currentMin) {
         StringBuilder sb = new StringBuilder();
@@ -110,14 +107,13 @@ public class HudElementDebug extends HudElement {
         if (currentHour < 10)
             sb.append(0);
         sb.append(currentHour);
-        return sb.toString() + ":" + getMinuteForString(currentMin) + " " + period;
+        return sb + ":" + getMinuteForString(currentMin) + " " + period;
     }
 
     /**
      * Transforms the minute into a two digit String
      *
-     * @param currentMin
-     *            the minute
+     * @param currentMin the minute
      */
     public static String getMinuteForString(long currentMin) {
         StringBuilder sb = new StringBuilder();

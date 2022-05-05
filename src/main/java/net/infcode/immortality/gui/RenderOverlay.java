@@ -29,6 +29,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.infcode.immortality.gui.elements.HudElementType;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
@@ -39,32 +40,32 @@ import net.minecraft.util.Identifier;
  * simplified for project use.
  */
 @Environment(EnvType.CLIENT)
-public class RenderOverlay implements HudRenderCallback{
+public class RenderOverlay implements HudRenderCallback {
 
     private final Hud hud;
     private final MinecraftClient mc;
 
     public RenderOverlay() {
-        this.hud = new HudVanilla(MinecraftClient.getInstance(),"vanilla","Vanilla");
+        this.hud = new Hud(MinecraftClient.getInstance(), "default", "Default Hud");
         this.mc = MinecraftClient.getInstance();
         HudRenderCallback.EVENT.register(this);
     }
 
     /**
      * Draw the specified HudElement of the HudElementType from the active Hud
-     * 
-     * @param type         the HudElementType to be rendered
+     *
+     * @param type the HudElementType to be rendered
      * @param partialTicks the partialTicks to be used for animations
      */
     private void drawElement(HudElementType type, MatrixStack ms, float partialTicks) {
 
-        if(this.hud.checkElementConditions(type)) {
-            if(!preventElementRenderType(type)) {
+        if (this.hud.checkElementConditions(type)) {
+            if (!preventElementRenderType(type)) {
                 bind(DrawableHelper.GUI_ICONS_TEXTURE);
-               	ms.push();
+                ms.push();
                 RenderSystem.enableBlend();
                 this.hud.drawElement(type, this.mc.inGameHud, ms, partialTicks, partialTicks, this.mc.getWindow().getScaledWidth(),
-                        this.mc.getWindow().getScaledHeight());
+                    this.mc.getWindow().getScaledHeight());
                 ms.pop();
             }
 
@@ -82,6 +83,7 @@ public class RenderOverlay implements HudRenderCallback{
     public static boolean shouldRenderVanilla(HudElementType type) {
         return isVanillaElement(type) || forceRenderTypeVanilla(type);
     }
+
     /**
      * Checks if the HudElementType has a setting to force the vanilla hud element
      * to be rendered and if it is activated
@@ -90,18 +92,10 @@ public class RenderOverlay implements HudRenderCallback{
         return false;
     }
 
-    /**
-     * Checks if the HudElementType has a setting to prevent the forge event and if
-     * it is activated
-     */
-    public static boolean preventEventType(HudElementType type) {
-        return false;
-    }
-    
     private void bind(Identifier res) {
         mc.getTextureManager().bindTexture(res);
     }
-    
+
     public static boolean isVanillaElement(HudElementType type) {
         return false;
     }

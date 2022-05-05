@@ -23,7 +23,7 @@
  *
  */
 
-package net.infcode.immortality.gui;
+package net.infcode.immortality.gui.elements;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
@@ -44,55 +44,87 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public abstract class HudElement {
 
-    /** The values of the color red */
+    /**
+     * The values of the color red
+     */
     public static final int COLOR_RED = 0xC10000;
 
-    /** The values of the color red */
+    /**
+     * The values of the color red
+     */
     public static final int COLOR_PINK = 0xFF69B4;
 
-    /** The values of the color red */
+    /**
+     * The values of the color red
+     */
     public static final int COLOR_BROWN = 0x8b4513;
 
-    /** The values of the color white */
+    /**
+     * The values of the color white
+     */
     public static final int COLOR_WHITE = 0xF2F2F2;
 
-    /** The values of the color white */
+    /**
+     * The values of the color white
+     */
     public static final int COLOR_ORANGE = 0xFF8400;
 
-    /** The values of the color green */
+    /**
+     * The values of the color green
+     */
     public static final int COLOR_GREEN = 0x3BC200;
 
-    /** The values of the color red */
+    /**
+     * The values of the color red
+     */
     public static final int COLOR_PURPLE = 0xA400F0;
 
-    /** The values of the color blue */
+    /**
+     * The values of the color blue
+     */
     public static final int COLOR_BLUE = 0x005BC2;
 
-    /** The values of the color blue */
+    /**
+     * The values of the color blue
+     */
     public static final int COLOR_AQUA = 0x00FFFF;
 
-    /** The value of the color black */
+    /**
+     * The value of the color black
+     */
     public static final int COLOR_BLACK = 0x292929;
 
-    /** The values of the color grey */
+    /**
+     * The values of the color grey
+     */
     public static final int COLOR_GREY = 0x8A8A8A;
 
-    /** The values of the color yellow */
+    /**
+     * The values of the color yellow
+     */
     public static final int COLOR_YELLOW = 0xEEEE00;
 
-    /** The values of the default color */
-    public static final int[] COLOR_DEFAULT = { 0x4C4C4C, 0x3D3D3D };
+    /**
+     * The values of the default color
+     */
+    public static final int[] COLOR_DEFAULT = {0x4C4C4C, 0x3D3D3D};
 
-    /** ResourceLocation of the interface texture for the RPG-HUD */
+    /**
+     * ResourceLocation of the interface texture for the RPG-HUD
+     */
     protected static final Identifier INTERFACE = new Identifier("rpghud:textures/interface.png");
 
     public static final int OFFSET_PERCENT = 25;
 
     public static final int OFFSET_PREVIEW = 0x5A5A5A;
 
-    /** The x coordinate the element will be rendered at on the screen */
+    /**
+     * The x coordinate the element will be rendered at on the screen
+     */
     protected int posX;
-    /** The y coordinate the element will be rendered at on the screen */
+    /**
+     * The y coordinate the element will be rendered at on the screen
+     */
     protected int posY;
 
     /**
@@ -104,36 +136,41 @@ public abstract class HudElement {
      */
     protected final int defaultPosY;
 
-    /** The width of this element */
+    /**
+     * The width of this element
+     */
     protected int elementWidth;
-    /** The height of this element */
+    /**
+     * The height of this element
+     */
     protected int elementHeight;
-    /** Whether this element can be moved */
+    /**
+     * Whether this element can be moved
+     */
     protected boolean movable;
-    /** The Type of this element */
+    /**
+     * The Type of this element
+     */
     protected HudElementType type;
 
-    /** The Minecraft instance */
+    /**
+     * The Minecraft instance
+     */
     protected MinecraftClient mc;
 
     protected float scale;
 
     public HudElementType parent;
+
     /**
      * Constructor
-     * 
-     * @param type
-     *            The HudElementType of this element
-     * @param posX
-     *            The initial position of this element (not yet implemented)
-     * @param posY
-     *            The initial position of this element (not yet implemented)
-     * @param width
-     *            The width of this element (not yet implemented)
-     * @param height
-     *            The height of this element (not yet implemented)
-     * @param movable
-     *            Whether this element should be allowed to be moved around
+     *
+     * @param type The HudElementType of this element
+     * @param posX The initial position of this element (not yet implemented)
+     * @param posY The initial position of this element (not yet implemented)
+     * @param width The width of this element (not yet implemented)
+     * @param height The height of this element (not yet implemented)
+     * @param movable Whether this element should be allowed to be moved around
      */
     public HudElement(HudElementType type, int posX, int posY, int width, int height, boolean movable) {
         this.type = type;
@@ -158,38 +195,19 @@ public abstract class HudElement {
 
     public abstract void drawElement(DrawableHelper gui, MatrixStack ms, float zLevel, float partialTicks, int scaledWidth, int scaledHeight);
 
-    /**
-     * Returns the x coordinate of this element
-     * 
-     * @return x coordinate
-     */
+    /* Getters */
     public int getPosX(int scaledWidth) {
         return this.posX;
     }
 
-    /**
-     * Returns the y coordinate of this element
-     * 
-     * @return y coordinate
-     */
     public int getPosY(int scaledHeight) {
         return this.posY;
     }
 
-    /**
-     * Returns the width of this element
-     * 
-     * @return width
-     */
     public int getWidth(int scaledWidth) {
         return this.elementWidth;
     }
 
-    /**
-     * Returns the height of this element
-     * 
-     * @return height
-     */
     public int getHeight(int scaledHeight) {
         return this.elementHeight;
     }
@@ -197,53 +215,40 @@ public abstract class HudElement {
     public float getScale() {
         return scale;
     }
-    
+
     public float getInvertedScale() {
         return 1f / getScale();
     }
-    /**
-     * Returns whether this element can be moved or not
-     * 
-     * @return movable
-     */
+
     public boolean isMovable() {
         return this.movable;
     }
 
-    /**
-     * Returns the type of this element
-     * 
-     * @return type
-     */
     public HudElementType getType() {
         return this.type;
     }
 
     /**
      * Sets the position of this element to posX and posY if they are valid
-     * 
-     * @param posX
-     * @param posY
+     *
+     * @param posX the X position to be set
+     * @param posY the Y position to be set
      * @return whether the position is valid or not
      */
     public boolean setPos(int posX, int posY) {
-        boolean xValid = false;
-        boolean yValid = false;
-        if (posX >= 0 && posX < (this.mc.getWindow().getScaledWidth() - this.elementWidth)) {
-            xValid = true;
+        if (posX < 0 && posX >= (this.mc.getWindow().getScaledWidth() - this.elementWidth)) {
+            return false;
         }
-        if (posY >= 0 && posY < (this.mc.getWindow().getScaledHeight() - this.elementHeight)) {
-            yValid = true;
+        if (posY < 0 && posY >= (this.mc.getWindow().getScaledHeight() - this.elementHeight)) {
+            return false;
         }
-        if (xValid && yValid) {
-            this.posX = posX;
-            this.posY = posY;
-        }
-        return xValid && yValid;
+        this.posX = posX;
+        this.posY = posY;
+        return true;
     }
 
     /**
-     * Resets the position of this element to it's default position
+     * Resets the position of this element to its default position
      */
     public void setPositionToDefault() {
         this.posX = this.defaultPosX;
@@ -262,20 +267,15 @@ public abstract class HudElement {
 
     /**
      * Draws a rectangle on the screen
-     * 
-     * @param posX
-     *            the x position on the screen
-     * @param posY
-     *            the y position on the screen
-     * @param width
-     *            the width of the rectangle
-     * @param height
-     *            the height of the rectangle
-     * @param color
-     *            the color of the rectangle
+     *
+     * @param posX the x position on the screen
+     * @param posY the y position on the screen
+     * @param width the width of the rectangle
+     * @param height the height of the rectangle
+     * @param color the color of the rectangle
      */
     public static void drawRect(MatrixStack ms, int posX, int posY, int width, int height, int color) {
-    	if (color == -1)
+        if (color == -1)
             return;
         float f3;
         if (color <= 0xFFFFFF && color >= 0)
@@ -288,7 +288,7 @@ public abstract class HudElement {
         RenderSystem.enableBlend();
         RenderSystem.disableTexture();
         RenderSystem.defaultBlendFunc();
-        RenderSystem.setShader(GameRenderer::getPositionColorShader);	
+        RenderSystem.setShader(GameRenderer::getPositionColorShader);
         RenderSystem.disableDepthTest();
         BufferBuilder vertexbuffer = Tessellator.getInstance().getBuffer();
         vertexbuffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
@@ -305,41 +305,30 @@ public abstract class HudElement {
 
     /**
      * Draw an outline on the screen
-     * 
-     * @param x
-     *            the x position on the screen
-     * @param y
-     *            the y position on the screen
-     * @param width
-     *            the width of the outline
-     * @param height
-     *            the height of the outline
-     * @param color
+     *
+     * @param x the x position on the screen
+     * @param y the y position on the screen
+     * @param width the width of the outline
+     * @param height the height of the outline
+     * @param color the color of the outline
      */
     protected static void drawOutline(MatrixStack ms, int x, int y, int width, int height, int color) {
         drawRect(ms, x, y, width, 1, color);
-        drawRect(ms, x, y+1, 1, height-2, color);
-        drawRect(ms, x + width - 1, y+1, 1, height-2, color);
+        drawRect(ms, x, y + 1, 1, height - 2, color);
+        drawRect(ms, x + width - 1, y + 1, 1, height - 2, color);
         drawRect(ms, x, y + height - 1, width, 1, color);
     }
 
     /**
      * Draws a bar on the screen
-     * 
-     * @param x
-     *            the x position on the screen
-     * @param y
-     *            the y position on the screen
-     * @param width
-     *            the width of the bar (with outline)
-     * @param height
-     *            the height of the bar (with outline)
-     * @param value
-     *            the converted value of the bar (maxed at 100.0D)
-     * @param colorBarLight
-     *            the color for the bar (light)
-     * @param colorBarDark
-     *            the color for the bar (dark
+     *
+     * @param x the x position on the screen
+     * @param y the y position on the screen
+     * @param width the width of the bar (with outline)
+     * @param height the height of the bar (with outline)
+     * @param value the converted value of the bar (maxed at 100.0D)
+     * @param colorBarLight the color for the bar (light)
+     * @param colorBarDark the color for the bar (dark
      */
     public static void drawCustomBar(MatrixStack ms, int x, int y, int width, int height, double value, int colorBarLight, int colorBarDark) {
         drawCustomBar(ms, x, y, width, height, value, HudElement.COLOR_DEFAULT[0], HudElement.COLOR_DEFAULT[1], colorBarLight, colorBarDark, true, 0x000000);
@@ -347,25 +336,16 @@ public abstract class HudElement {
 
     /**
      * Draws a bar on the screen
-     * 
-     * @param x
-     *            the x position on the screen
-     * @param y
-     *            the y position on the screen
-     * @param width
-     *            the width of the bar (with outline)
-     * @param height
-     *            the height of the bar (with outline)
-     * @param value
-     *            the converted value of the bar (maxed at 100.0D)
-     * @param colorGroundLight
-     *            the color for the background (light)
-     * @param colorGroundDark
-     *            the color for the background (dark)
-     * @param colorBarLight
-     *            the color for the bar (light)
-     * @param colorBarDark
-     *            the color for the bar (dark
+     *
+     * @param x the x position on the screen
+     * @param y the y position on the screen
+     * @param width the width of the bar (with outline)
+     * @param height the height of the bar (with outline)
+     * @param value the converted value of the bar (maxed at 100.0D)
+     * @param colorGroundLight the color for the background (light)
+     * @param colorGroundDark the color for the background (dark)
+     * @param colorBarLight the color for the bar (light)
+     * @param colorBarDark the color for the bar (dark
      */
     public static void drawCustomBar(MatrixStack ms, int x, int y, int width, int height, double value, int colorGroundLight, int colorGroundDark, int colorBarLight, int colorBarDark) {
         drawCustomBar(ms, x, y, width, height, value, colorGroundLight, colorGroundDark, colorBarLight, colorBarDark, true, 0x000000);
@@ -373,27 +353,17 @@ public abstract class HudElement {
 
     /**
      * Draws a bar on the screen
-     * 
-     * @param x
-     *            the x position on the screen
-     * @param y
-     *            the y position on the screen
-     * @param width
-     *            the width of the bar (with outline)
-     * @param height
-     *            the height of the bar (with outline)
-     * @param value
-     *            the converted value of the bar (maxed at 100.0D)
-     * @param colorGroundLight
-     *            the color for the background (light)
-     * @param colorGroundDark
-     *            the color for the background (dark)
-     * @param colorBarLight
-     *            the color for the bar (light)
-     * @param colorBarDark
-     *            the color for the bar (dark
-     * @param outlined
-     *            whether this bar has an outline or not
+     *
+     * @param x the x position on the screen
+     * @param y the y position on the screen
+     * @param width the width of the bar (with outline)
+     * @param height the height of the bar (with outline)
+     * @param value the converted value of the bar (maxed at 100.0D)
+     * @param colorGroundLight the color for the background (light)
+     * @param colorGroundDark the color for the background (dark)
+     * @param colorBarLight the color for the bar (light)
+     * @param colorBarDark the color for the bar (dark
+     * @param outlined whether this bar has an outline or not
      */
     public static void drawCustomBar(MatrixStack ms, int x, int y, int width, int height, double value, int colorGroundLight, int colorGroundDark, int colorBarLight, int colorBarDark, boolean outlined) {
         drawCustomBar(ms, x, y, width, height, value, colorGroundLight, colorGroundDark, colorBarLight, colorBarDark, outlined, 0x000000);
@@ -401,27 +371,17 @@ public abstract class HudElement {
 
     /**
      * Draws a bar on the screen
-     * 
-     * @param x
-     *            the x position on the screen
-     * @param y
-     *            the y position on the screen
-     * @param width
-     *            the width of the bar (with outline)
-     * @param height
-     *            the height of the bar (with outline)
-     * @param value
-     *            the converted value of the bar (maxed at 100.0D)
-     * @param colorGroundLight
-     *            the color for the background (light)
-     * @param colorGroundDark
-     *            the color for the background (dark)
-     * @param colorBarLight
-     *            the color for the bar (light)
-     * @param colorBarDark
-     *            the color for the bar (dark
-     * @param colorOutline
-     *            the color of the outline
+     *
+     * @param x the x position on the screen
+     * @param y the y position on the screen
+     * @param width the width of the bar (with outline)
+     * @param height the height of the bar (with outline)
+     * @param value the converted value of the bar (maxed at 100.0D)
+     * @param colorGroundLight the color for the background (light)
+     * @param colorGroundDark the color for the background (dark)
+     * @param colorBarLight the color for the bar (light)
+     * @param colorBarDark the color for the bar (dark
+     * @param colorOutline the color of the outline
      */
     public static void drawCustomBar(MatrixStack ms, int x, int y, int width, int height, double value, int colorGroundLight, int colorGroundDark, int colorBarLight, int colorBarDark, int colorOutline) {
         drawCustomBar(ms, x, y, width, height, value, colorGroundLight, colorGroundDark, colorBarLight, colorBarDark, true, colorOutline);
@@ -429,41 +389,30 @@ public abstract class HudElement {
 
     /**
      * Draws a bar on the screen
-     * 
-     * @param x
-     *            the x position on the screen
-     * @param y
-     *            the y position on the screen
-     * @param width
-     *            the width of the bar (with outline)
-     * @param height
-     *            the height of the bar (with outline)
-     * @param value
-     *            the converted value of the bar (maxed at 100.0D)
-     * @param colorGroundLight
-     *            the color for the background (light)
-     * @param colorGroundDark
-     *            the color for the background (dark)
-     * @param colorBarLight
-     *            the color for the bar (light)
-     * @param colorBarDark
-     *            the color for the bar (dark
-     * @param outlined
-     *            whether this bar has an outline or not
-     * @param colorOutline
-     *            the color of the outline
+     *
+     * @param x the x position on the screen
+     * @param y the y position on the screen
+     * @param width the width of the bar (with outline)
+     * @param height the height of the bar (with outline)
+     * @param value the converted value of the bar (maxed at 100.0D)
+     * @param colorGroundLight the color for the background (light)
+     * @param colorGroundDark the color for the background (dark)
+     * @param colorBarLight the color for the bar (light)
+     * @param colorBarDark the color for the bar (dark
+     * @param outlined whether this bar has an outline or not
+     * @param colorOutline the color of the outline
      */
     public static void drawCustomBar(MatrixStack ms, int x, int y, int width, int height, double value, int colorGroundLight, int colorGroundDark, int colorBarLight, int colorBarDark, boolean outlined, int colorOutline) {
         if (value < 0.0D) {
             value = 0.0D;
-        }else if (value > 100D) {
+        } else if (value > 100D) {
             value = 100D;
         }
 
-        int offset = outlined? 1 : 0;
+        int offset = outlined ? 1 : 0;
 
         int filledWidth = Math.max(width - (offset * 2), 0);
-        int filledHeight = Math.max( height - (offset * 2), 0);
+        int filledHeight = Math.max(height - (offset * 2), 0);
 
         int percentFilled = (int) Math.round(value / 100.0D * filledWidth);
 
@@ -482,31 +431,22 @@ public abstract class HudElement {
 
     /**
      * Draws a tetragon on the screen
-     * 
-     * @param posX1
-     *            x position of the upper left corner
-     * @param posX2
-     *            x position of the lower left corner
-     * @param posY1
-     *            y position of the upper left corner
-     * @param posY2
-     *            y position of the lower left corner
-     * @param width1
-     *            width of the top edge
-     * @param width2
-     *            width of the bottom edge
-     * @param height1
-     *            height of the left edge
-     * @param height2
-     *            height of the right edge
-     * @param color
-     *            color of the tetragon (hexa format 0xAARRGGBB)
+     *
+     * @param posX1 x position of the upper left corner
+     * @param posX2 x position of the lower left corner
+     * @param posY1 y position of the upper left corner
+     * @param posY2 y position of the lower left corner
+     * @param width1 width of the top edge
+     * @param width2 width of the bottom edge
+     * @param height1 height of the left edge
+     * @param height2 height of the right edge
+     * @param color color of the tetragon (hex format 0xAARRGGBB)
      */
     public void drawTetragon(int posX1, int posX2, int posY1, int posY2, int width1, int width2, int height1, int height2, int color) {
         if (color == -1)
             return;
-        if(width1 < 0) width1 = 0;
-        if(width2 < 0) width2 = 0;
+        width1 = Math.max(width1, 0);
+        width2 = Math.max(width2, 0);
         float f3;
         if (color <= 0xFFFFFF && color >= 0)
             f3 = 1.0F;
@@ -520,14 +460,14 @@ public abstract class HudElement {
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
         RenderSystem.disableDepthTest();
-        BufferBuilder vertexbuffer = Tessellator.getInstance().getBuffer();
-        vertexbuffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
-        vertexbuffer.vertex(posX1, (double) posY1 + height1, 0.0D).color(f, f1, f2, f3).next();
-        vertexbuffer.vertex((double) posX2 + width2, (double) posY2 + height2, 0.0D).color(f, f1, f2, f3).next();
-        vertexbuffer.vertex((double) posX1 + width1, posY2, 0.0D).color(f, f1, f2, f3).next();
-        vertexbuffer.vertex(posX2, posY1, 0.0D).color(f, f1, f2, f3).next();
-        vertexbuffer.end();
-        BufferRenderer.draw(vertexbuffer);
+        BufferBuilder vertexBuffer = Tessellator.getInstance().getBuffer();
+        vertexBuffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
+        vertexBuffer.vertex(posX1, (double) posY1 + height1, 0.0D).color(f, f1, f2, f3).next();
+        vertexBuffer.vertex((double) posX2 + width2, (double) posY2 + height2, 0.0D).color(f, f1, f2, f3).next();
+        vertexBuffer.vertex((double) posX1 + width1, posY2, 0.0D).color(f, f1, f2, f3).next();
+        vertexBuffer.vertex(posX2, posY1, 0.0D).color(f, f1, f2, f3).next();
+        vertexBuffer.end();
+        BufferRenderer.draw(vertexBuffer);
         RenderSystem.enableTexture();
         RenderSystem.disableBlend();
         RenderSystem.enableDepthTest();
@@ -593,9 +533,8 @@ public abstract class HudElement {
 
     /**
      * Binds a texture to the TextureManager
-     * 
-     * @param res
-     *            The ResourceLocation of the texture that should be bind
+     *
+     * @param res The ResourceLocation of the texture that should be bind
      */
     protected void bind(Identifier res) {
         RenderSystem.setShaderTexture(0, res);
@@ -603,32 +542,26 @@ public abstract class HudElement {
 
     /**
      * Returns the ResourceLocation for the skin of the player
-     * 
-     * @param player
-     *            the player whose skin should be returned
+     *
+     * @param player the player whose skin should be returned
      * @return the ResourceLocation
      */
     protected static Identifier getPlayerSkin(ClientPlayerEntity player) {
         return player.getSkinTexture();
     }
-    
-       /**
+
+    /**
      * Renders an item on the screen
-     * 
-     * @param x
-     *            the x position on the screen
-     * @param y
-     *            the y position on the screen
-     * @param partialTicks
-     *            the partial ticks (used for animation)
-     * @param player
-     *            the player who should get the item rendered
-     * @param item
-     *            the item (via ItemStack)
+     *
+     * @param x the x position on the screen
+     * @param y the y position on the screen
+     * @param partialTicks the partial ticks (used for animation)
+     * @param player the player who should get the item rendered
+     * @param item the item (via ItemStack)
      */
     protected void renderHotbarItem(int x, int y, float partialTicks, PlayerEntity player, ItemStack item) {
         if (!item.isEmpty()) {
-        	MatrixStack matrixStack = RenderSystem.getModelViewStack();
+            MatrixStack matrixStack = RenderSystem.getModelViewStack();
             float f = item.getBobbingAnimationTime() - partialTicks;
 
             if (f > 0.0F) {
@@ -648,16 +581,16 @@ public abstract class HudElement {
             this.mc.getItemRenderer().renderGuiItemOverlay(this.mc.textRenderer, item, x, y);
         }
     }
-    
+
     protected void drawStringWithBackground(MatrixStack ms, String text, int posX, int posY, int colorMain, int colorBackground) {
-        this.mc.textRenderer.draw(ms,text, posX + 1, posY, colorBackground);
-        this.mc.textRenderer.draw(ms,text, posX - 1, posY, colorBackground);
-        this.mc.textRenderer.draw(ms,text, posX, posY + 1, colorBackground);
-        this.mc.textRenderer.draw(ms,text, posX, posY - 1, colorBackground);
-        this.mc.textRenderer.draw(ms,text, posX, posY, colorMain);
+        this.mc.textRenderer.draw(ms, text, posX + 1, posY, colorBackground);
+        this.mc.textRenderer.draw(ms, text, posX - 1, posY, colorBackground);
+        this.mc.textRenderer.draw(ms, text, posX, posY + 1, colorBackground);
+        this.mc.textRenderer.draw(ms, text, posX, posY - 1, colorBackground);
+        this.mc.textRenderer.draw(ms, text, posX, posY, colorMain);
         RenderSystem.enableBlend();
     }
-    
+
     public boolean isChatOpen() {
         return this.mc.currentScreen instanceof net.minecraft.client.gui.screen.ChatScreen;
     }
