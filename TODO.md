@@ -1,3 +1,8 @@
+Long term todo:
+
+- [ ] Support to JEI
+- [ ] Support to Patchouli
+
 Things to do before ver 0.2.0:
 
 - [ ] Add config file
@@ -6,8 +11,9 @@ Things to do before ver 0.2.0:
 - [ ] Energy properties
 
 Things to be done before ver 0.1.1:
+
 - [ ] Player properties
-- [ ] Player properties hud (debug)
+- [x] Player properties hud (debug)
 
 ========
 
