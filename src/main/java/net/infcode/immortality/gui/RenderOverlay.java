@@ -1,7 +1,7 @@
 /**
  * This file is imported from <a href="https://github.com/KosmX/RPG-Hud">https://github.com/KosmX/RPG-Hud</a>
  * and is subject to some modifications and simplifications to suit in this project. The original
- * code is under CC0 license, which can be found in ALTERNATE_LICENSE under the project directory.
+ * code is under CC0 license, which can be found in ALTERNATE_LICENSE.txt under the project directory.
  */
 
 package net.infcode.immortality.gui;
