@@ -23,23 +23,29 @@
  *
  */
 
-package net.infcode.immortality.world.feature;
+package net.infcode.immortality.mixin;
 
-import net.infcode.immortality.mixin.OrePlacedFeaturesInvoker;
-import net.minecraft.util.registry.RegistryEntry;
-import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.feature.OrePlacedFeatures;
-import net.minecraft.world.gen.feature.PlacedFeature;
-import net.minecraft.world.gen.feature.PlacedFeatures;
-import net.minecraft.world.gen.placementmodifier.*;
+import net.minecraft.world.gen.placementmodifier.PlacementModifier;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
 import java.util.List;
 
-public class ModOrePlacedFeatures {
-    public static final RegistryEntry<PlacedFeature> ORE_JADE = PlacedFeatures.register("ore_jade",
-        ModOreConfiguredFeatures.ORE_JADE, OrePlacedFeaturesInvoker.invokeModifiersWithCount(2,
-            HeightRangePlacementModifier.trapezoid(YOffset.fixed(-32), YOffset.fixed(32))));
-    public static final RegistryEntry<PlacedFeature> ORE_JADE_BURIED = PlacedFeatures.register(
-        "ore_jade_buried", ModOreConfiguredFeatures.ORE_JADE_BURIED, OrePlacedFeaturesInvoker.invokeModifiersWithCount(4,
-            HeightRangePlacementModifier.uniform(YOffset.getBottom(), YOffset.fixed(64))));
+@Mixin(OrePlacedFeatures.class)
+public interface OrePlacedFeaturesInvoker {
+    @Invoker("modifiers")
+    static List<PlacementModifier> invokeModifiers(PlacementModifier countModifier, PlacementModifier heightModifier) {
+        throw new AssertionError("Invoker of OrePlacedFeatures#modifiers fails.");
+    }
+
+    @Invoker("modifiersWithCount")
+    static List<PlacementModifier> invokeModifiersWithCount(int count, PlacementModifier heightModifier) {
+        throw new AssertionError("Invoker of OrePlacedFeatures#modifiersWithCount fails.");
+    }
+
+    @Invoker("modifiersWithRarity")
+    static List<PlacementModifier> invokeModifiersWithRarity(int chance, PlacementModifier heightModifier) {
+        throw new AssertionError("Invoker of OrePlacedFeatures#modifiersWithRarity fails.");
+    }
 }

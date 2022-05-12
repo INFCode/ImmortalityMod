@@ -4,6 +4,7 @@
   "package": "net.infcode.immortality.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "OrePlacedFeaturesInvoker"
   ],
   "client": [
     "ExampleMixin"
