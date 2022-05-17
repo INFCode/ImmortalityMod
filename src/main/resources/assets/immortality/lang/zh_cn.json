@@ -5,5 +5,13 @@
 
 
   "item.immortality.alchemy_fruit": "灵果",
-  "item.immortality.jade": "玉石"
+  "item.immortality.jade": "玉石",
+
+
+  "data.immortality.power.none": "纯粹",
+  "data.immortality.power.metal": "金",
+  "data.immortality.power.wood": "木",
+  "data.immortality.power.water": "水",
+  "data.immortality.power.fire": "火",
+  "data.immortality.power.earth": "土"
 }

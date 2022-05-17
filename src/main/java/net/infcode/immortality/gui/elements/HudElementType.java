@@ -16,6 +16,7 @@ import net.minecraft.client.resource.language.I18n;
  */
 @Environment(EnvType.CLIENT)
 public enum HudElementType {
+    TIME("gui.hud.immortality.time"),
     DEBUG("gui.hud.immortality.debug");
 
     private final String displayName;

@@ -24,11 +24,19 @@
     ],
     "client": [
       "net.infcode.immortality.ImmortalityClient"
+    ],
+    "cardinal-components-entity": [
+      "net.infcode.immortality.registry.ModComponents"
     ]
   },
   "mixins": [
     "immortality.mixins.json"
   ],
+  "custom": {
+    "cardinal-components": [
+      "immortality:power_component"
+    ]
+  },
 
   "depends": {
     "fabricloader": ">=0.13.3",
@@ -37,6 +45,5 @@
     "java": ">=17"
   },
   "suggests": {
-    "another-mod": "*"
   }
 }

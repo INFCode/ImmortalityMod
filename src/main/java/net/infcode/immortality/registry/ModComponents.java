@@ -23,32 +23,18 @@
  *
  */
 
-package net.infcode.immortality.item;
+package net.infcode.immortality.registry;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.infcode.immortality.ImmortalityMod;
-import net.infcode.immortality.block.ModBlocks;
-import net.minecraft.item.AliasedBlockItem;
-import net.minecraft.item.FoodComponent;
-import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
+import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
+import net.infcode.immortality.power.IPowerComponent;
+import net.infcode.immortality.power.NaturalPower;
+import net.infcode.immortality.power.PowerTypes;
+import net.minecraft.entity.Entity;
 
-@SuppressWarnings({"unused"})
-public class ModItems {
-    public static final Item ALCHEMY_FRUIT = registerItem("alchemy_fruit",
-        new AliasedBlockItem(ModBlocks.ALCHEMY_BUSH,
-            new FabricItemSettings().group(ModItemGroups.IMMORTALITY_GROUP).food(
-                new FoodComponent.Builder().hunger(2).alwaysEdible().build())));
-
-    public static final Item JADE = registerItem("jade",
-        new Jade(new FabricItemSettings().group(ModItemGroups.IMMORTALITY_GROUP)));
-
-    private static Item registerItem(String name, Item item) {
-        return Registry.register(Registry.ITEM, new Identifier(ImmortalityMod.MODID, name), item);
-    }
-
-    public static void registerModItems() {
-        ImmortalityMod.LOGGER.info("Registering mod items for " + ImmortalityMod.MODID + "...");
+public final class ModComponents implements EntityComponentInitializer {
+    @Override
+    public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
+        registry.registerFor(Entity.class, IPowerComponent.POWER, it -> new NaturalPower(1, PowerTypes.NONE));
     }
 }

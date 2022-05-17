@@ -23,32 +23,34 @@
  *
  */
 
-package net.infcode.immortality.item;
+package net.infcode.immortality.power;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.infcode.immortality.ImmortalityMod;
-import net.infcode.immortality.block.ModBlocks;
-import net.minecraft.item.AliasedBlockItem;
-import net.minecraft.item.FoodComponent;
-import net.minecraft.item.Item;
+import dev.onyxstudios.cca.api.v3.component.ComponentKey;
+import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
+import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
-@SuppressWarnings({"unused"})
-public class ModItems {
-    public static final Item ALCHEMY_FRUIT = registerItem("alchemy_fruit",
-        new AliasedBlockItem(ModBlocks.ALCHEMY_BUSH,
-            new FabricItemSettings().group(ModItemGroups.IMMORTALITY_GROUP).food(
-                new FoodComponent.Builder().hunger(2).alwaysEdible().build())));
+public interface IPowerComponent extends AutoSyncedComponent {
+    ComponentKey<IPowerComponent> POWER = ComponentRegistry.getOrCreate(
+        new Identifier("immortality", "power_component"), IPowerComponent.class);
 
-    public static final Item JADE = registerItem("jade",
-        new Jade(new FabricItemSettings().group(ModItemGroups.IMMORTALITY_GROUP)));
-
-    private static Item registerItem(String name, Item item) {
-        return Registry.register(Registry.ITEM, new Identifier(ImmortalityMod.MODID, name), item);
+    static <T> IPowerComponent getFrom(T provider) {
+        return POWER.get(provider);
     }
 
-    public static void registerModItems() {
-        ImmortalityMod.LOGGER.info("Registering mod items for " + ImmortalityMod.MODID + "...");
+    int getAmount();
+
+    PowerTypes getType();
+
+    IPowerComponent setAmount(int amount);
+
+    IPowerComponent setType(PowerTypes type);
+
+    default IPowerComponent changeAmount(int delta) {
+        return setAmount(Math.max(0, getAmount() + delta));
+    }
+
+    default <T> void sync(T target) {
+        POWER.sync(target);
     }
 }

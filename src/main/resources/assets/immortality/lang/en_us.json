@@ -5,5 +5,12 @@
 
 
   "item.immortality.alchemy_fruit": "Alchemy Fruit",
-  "item.immortality.jade": "Jade"
+  "item.immortality.jade": "Jade",
+
+  "data.immortality.power.none": "Pure",
+  "data.immortality.power.metal": "Metal",
+  "data.immortality.power.wood": "Wood",
+  "data.immortality.power.water": "Water",
+  "data.immortality.power.fire": "Fire",
+  "data.immortality.power.earth": "Earth"
 }

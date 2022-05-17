@@ -7,10 +7,12 @@
 package net.infcode.immortality.gui.elements;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.infcode.immortality.item.ModItems;
+import net.infcode.immortality.power.IPowerComponent;
+import net.infcode.immortality.power.PowerTypes;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 
 public class HudElementDebug extends HudElement {
     public HudElementDebug() {
@@ -21,117 +23,49 @@ public class HudElementDebug extends HudElement {
     public boolean checkConditions() {
         return super.checkConditions()
                    && !this.mc.options.debugEnabled
-                   && this.mc.player.getInventory().contains(new ItemStack(Items.CLOCK));
+                   && this.mc.player.getInventory().contains(new ItemStack(ModItems.JADE));
     }
 
     @Override
     public void drawElement(DrawableHelper gui, MatrixStack ms, float zLevel, float partialTicks, int scaledWidth, int scaledHeight) {
-        int clockColor = getClockColor();
-        DrawableHelper.drawStringWithShadow(ms, this.mc.textRenderer, getTime(), 4, 52, clockColor);
+        int powerColor = getPowerColor();
+        String powerInfo = getPower() + '(' + getPowerTypeName() + ')';
+        DrawableHelper.drawStringWithShadow(ms, this.mc.textRenderer, powerInfo, 4, 72, powerColor);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    /**
-     * Returns the time of the minecraft world as a String
-     */
-    public String getTime() {
-        long time = this.mc.player.world.getTimeOfDay();
-        long day = this.mc.player.world.getTimeOfDay() / 24000L;
-        long currentTime = time - (24000L * day);
-        long currentHour = (currentTime / 1000L) + 6L;
-        double currentTimeMin = currentTime - ((currentHour - 6L) * 1000L);
-        currentTimeMin = currentTimeMin / (1000.0D / 60.0D);
-        int currentMin = (int) currentTimeMin;
-        if (currentHour > 24)
-            currentHour -= 24L;
-        return get24HourTimeForString(currentHour, currentMin);
+    public String getPower() {
+        return String.valueOf(IPowerComponent.getFrom(this.mc.player).getAmount());
     }
 
-    /**
-     * Formats the parameter time into the 24 hour format and returns it as a
-     * String
-     *
-     * @param currentHour the hour
-     * @param currentMin the minute
-     */
-    public static String get24HourTimeForString(long currentHour, long currentMin) {
-        StringBuilder sb = new StringBuilder();
-        if (currentHour == 24)
-            currentHour = 0;
-        if (currentHour < 10)
-            sb.append("0");
-        sb.append(currentHour);
-        return sb + ":" + getMinuteForString(currentMin);
+    public String getPowerTypeName() {
+        return IPowerComponent.getFrom(this.mc.player).getType().getName();
     }
 
-    /**
-     * Formats the parameter time into the 12 hour format and returns it as a
-     * string
-     *
-     * @param currentHour the hour
-     * @param currentMin the minute
-     */
-    public static String get12HourTimeForString(long currentHour, long currentMin) {
-        StringBuilder sb = new StringBuilder();
-        String period = "am";
-        if (currentHour == 12) {
-            period = "pm";
+    public int getPowerColor() {
+        PowerTypes type = IPowerComponent.getFrom(this.mc.player).getType();
+
+        switch (type) {
+            case NONE -> {
+                return 0x606060;
+            }
+            case METAL -> {
+                return 0xFFDD11;
+            }
+            case WOOD -> {
+                return 0x009900;
+            }
+            case WATER -> {
+                return 0x3399FF;
+            }
+            case FIRE -> {
+                return 0xFF0000;
+            }
+            case EARTH -> {
+                return 0x997722;
+            }
         }
-        if (currentHour == 24) {
-            currentHour = 12;
-            period = "am";
-        }
-        if (currentHour > 12) {
-            currentHour -= 12;
-            period = "pm";
-        }
-        if (currentHour < 10)
-            sb.append(0);
-        sb.append(currentHour);
-        return sb + ":" + getMinuteForString(currentMin) + " " + period;
-    }
-
-    /**
-     * Transforms the minute into a two digit String
-     *
-     * @param currentMin the minute
-     */
-    public static String getMinuteForString(long currentMin) {
-        StringBuilder sb = new StringBuilder();
-        if (currentMin < 10)
-            sb.append("0");
-        sb.append(currentMin);
-        return sb.toString();
-    }
-
-    public int getClockColor() {
-        long time = this.mc.player.world.getTimeOfDay();
-        long day = this.mc.player.world.getTimeOfDay() / 24000L;
-        long currentTime = time - (24000L * day);
-        if (currentTime < 1000)
-            return 0xFFAF00;
-        else if (currentTime < 6000)
-            return 0xFFAF00;
-        else if (currentTime < 11000)
-            return 0xFFCF00;
-        else if (currentTime < 12000)
-            return 0xFFAF00;
-        else if (currentTime < 13000)
-            return 0xFFA200;
-        else if (currentTime < 13500)
-            return 0xE36E21;
-        else if (currentTime < 18000)
-            return 0x345D74;
-        else if (currentTime < 21000)
-            return 0x1F3847;
-        else if (currentTime < 22250)
-            return 0x345D74;
-        else if (currentTime < 22500)
-            return 0x775D74;
-        else if (currentTime < 23000)
-            return 0xE36E21;
-        else
-            return 0xFFA200;
+        return 0;
     }
 
 }
