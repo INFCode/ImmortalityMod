@@ -7,6 +7,8 @@
   "item.immortality.alchemy_fruit": "Alchemy Fruit",
   "item.immortality.jade": "Jade",
 
+  "itemGroup.immortality.items": "Immortality Items",
+
   "data.immortality.power.none": "Pure",
   "data.immortality.power.metal": "Metal",
   "data.immortality.power.wood": "Wood",
